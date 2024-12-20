@@ -1,0 +1,6 @@
+[book]
+authors = ["enigmurl"]
+language = "en"
+multilingual = false
+src = "src"
+title = "Quarve"
