@@ -44,19 +44,19 @@ or by using ```quarve run```.
 ## Design Principles
 We designed Quarve to satisfy the core principles:
 
-1. *Multithreaded* Quarve extends rust's fearless concurrency to
-multithreaded app development.
-2. *Declarative* We aim to make the syntax of Quarve convenient to read,
-without overly relying on macros. Quarve also follows the pattern of
-composability, allowing for reusable and easy-to-understand code.
-3. *Rust-first* As opposed to being a port of a UI library designed for
-another language, Quarve is built around the features
-that define rust: monomorphism, thread safety, advanced types, speed, and more.
-4. *Native* Quarve views are native-backed, avoiding web browsers and gpu renderers.
-This allows for small installation size and memory footprint.
-5. *Fast* We do not use virtual doms and aim for minimal overheard
-compared to a fully native application
-(there is still have some work to do).
+1. **Multithreaded** Quarve extends Rust's fearless concurrency to
+   multithreaded app development.
+2. **Declarative** We aim to make the syntax of Quarve convenient to read,
+   without overly relying on macros. Quarve also follows the pattern of
+   composability, allowing for reusable and easy-to-understand code.
+3. **Rust-first** As opposed to being a port of a UI library designed for
+   another language, Quarve is built around the features
+   that define Rust: monomorphism, thread safety, advanced types, speed, and more.
+4. **Native** Quarve views are native-backed, avoiding web browsers and gpu renderers.
+   This allows for small installation size and memory footprint.
+5. **Fast** We do not use virtual doms and aim for minimal overheard
+   compared to a fully native application
+   (there is still have some work to do).
 
 Currently, Quarve is implemented for macOS, Windows and Linux.
 There are lots of features that are yet to be added,
