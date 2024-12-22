@@ -1,5 +1,7 @@
 # Quarve
 
+**Quarve is in pre-alpha. Use at your own risk**
+
 Quarve is an experimental rust UI library for desktop applications.
 It was made to develop [Monocurl](https://www.monocurl.com),
 a mathematical animation app, but can be used more generally.
@@ -44,29 +46,30 @@ or by using ```quarve run```.
 ## Design Principles
 We designed Quarve to satisfy the core principles:
 
-1. **Multithreaded** Quarve extends Rust's fearless concurrency to
+1. **Multithreaded** Quarve extends rust's fearless concurrency to
    multithreaded app development.
 2. **Declarative** We aim to make the syntax of Quarve convenient to read,
    without overly relying on macros. Quarve also follows the pattern of
    composability, allowing for reusable and easy-to-understand code.
 3. **Rust-first** As opposed to being a port of a UI library designed for
    another language, Quarve is built around the features
-   that define Rust: monomorphism, thread safety, advanced types, speed, and more.
+   that define Rust: monomorphism, thread safety, composition, speed, and more.
 4. **Native** Quarve views are native-backed, avoiding web browsers and gpu renderers.
    This allows for small installation size and memory footprint.
 5. **Fast** We do not use virtual doms and aim for minimal overheard
    compared to a fully native application
-   (there is still have some work to do).
+   (there is still some work to do).
 
 Currently, Quarve is implemented for macOS, Windows and Linux.
-There are lots of features that are yet to be added,
-but you can still do a lot with the basics.
+There are many features that are yet to be added,
+but the basics are implemented.
 
 ## Learning
 This book is split into several sections. Rather than reading
 each section completely one-by-one, we recommend skimming each section
 until you have an intution of how that part of Quarve works and returning
-whenever you need to reference details. Nevertheless, make sure to follow along!
+whenever you need to reference details. Nevertheless, make sure to follow along
+by coding examples!
 
 Documentation is available at [docs.rs](https://docs.rs/quarve/0.1.0/quarve/).
 
