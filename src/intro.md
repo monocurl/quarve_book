@@ -8,7 +8,9 @@ a mathematical animation app, but can be used more generally.
 
 ## Example
 
-Button and counter example.
+Button and counter example. For other full examples, please check out the
+[git repository](https://github.com/monocurl/quarve).
+
 ```rust
 fn counter(s: MSlock) -> impl IVP {
     // state
@@ -76,10 +78,15 @@ Documentation is available at [docs.rs](https://docs.rs/quarve/0.1.0/quarve/).
 For further learning, we recommend looking through
 the [Monocurl](https://github.com/monocurl/monocurl) source code
 as it is the most complex application using Quarve.
+Simpler examples can be found in the
+[git repository](https://github.com/monocurl/quarve).
 Otherwise, feel free to ask for help in the
 [Discord server](https://discord.gg/7g94JR3SAD).
 
 ## Feature State
+
+Here are my personal thoughts about some of the features of Quarve. Remember that
+this is a work-in-progress crate and should not be considered production ready.
 
 Implemented in an elegant manner
 - Layout
@@ -92,6 +99,7 @@ Implemented but minor annoyances
 - Event handling
 - Textview
 - Window and View customization
+- Menus
 
 Implemented but major annoyances
 - Focusing views

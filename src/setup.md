@@ -44,6 +44,13 @@ E.g. `~/Applications/Qt/6.8.1/macos`.
 quarve new <project_name>
 ```
 
+It may be helpful for beginners to include the quarve prelude to access commonly
+used constants, modules, functions, and traits without having to explicitly import them.
+This is optional, though.
+```rust
+use quarve::prelude::*
+```
+
 ## Run project
 You can run the project just like any other rust binary, or use the following command:
 ```bash
