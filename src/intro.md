@@ -26,7 +26,7 @@ fn counter(s: MSlock) -> impl IVP {
         .push(button.bold())
         .push(display)
         .text_color(BLACK)
-        .frame(F.intrinsic(400, 400).align(Center).unlimited_stretch())
+        .frame(F.intrinsic(400, 400).unlimited_stretch())
         .background(WHITE)
 }
 ```
@@ -78,3 +78,26 @@ the [Monocurl](https://github.com/monocurl/monocurl) source code
 as it is the most complex application using Quarve.
 Otherwise, feel free to ask for help in the
 [Discord server](https://discord.gg/7g94JR3SAD).
+
+## Feature State
+
+Implemented in an elegant manner
+- Layout
+- State (some small things to change)
+- Undo/Redo
+- Environments
+- Modifiers
+
+Implemented but minor annoyances
+- Event handling
+- Textview
+- Window and View customization
+
+Implemented but major annoyances
+- Focusing views
+- Many arbitrary controls (e.g. slides) are missing
+
+Not Yet Implemented
+- Vector graphics rendering
+- Video/audio support
+- Many details are missing
