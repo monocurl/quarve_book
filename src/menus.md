@@ -39,8 +39,8 @@ The idea is that when you create a window, each menu item is really a receiver
 with no action in place. Then, the view hierarchy acts as the sender and provides
 the appropriate menu with an action. For instance, we could have a "Select All"
 menu item that initially has no action. Whenever a text field is visible, it
-enables the "Select All" menu item and populates it with an action when
-that menu item is clicked.
+enables the "Select All" menu item and populates it with an action to take when
+the menu item is clicked.
 
 The `MenuChannel` is an object that acts as the coordinator between the sender and
 receiver. Initially, you create the menu channel object and pass it to the recipient menu
@@ -48,7 +48,7 @@ and the view that will act as the sender. Note that `MenuChannel`s
 are internally ARCed so that you can clone them without hassle.
 
 Here's how it looks to pass the channel to the menu.
-```
+```rust
 fn menu(&self, env: &<Self::Environment as Environment>::Const, s: MSlock) -> WindowMenu {
     // in practice, this initialization would be done
     // somewhere else (likely in environment initialization)
@@ -76,12 +76,10 @@ to the `MenuReceiver`. When it becomes hidden again, the corresponding action is
 // assume that we properly transferred the same channel as above
 // to here
 fn rabbits(new_mc: MenuChannel) {
-  let new_mc = <...>
-
   text("rabbits")
     // this will populate the appropriate menu receiver
     // with the given action
-    // only whenever the "rabbits" label is shown
+    // only whenever this IVP ("rabbits" label) is shown
     .menu_send(&new_mc, |_s| {
       println!("Creating new rabbit!");
     });
@@ -89,5 +87,5 @@ fn rabbits(new_mc: MenuChannel) {
 ```
 
 In some cases however, you may need more fine grained control.
-In these cases, you can explicitly use the `set` method of the menu.
+In these cases, you can explicitly use the `set` method of the MenuChannel.
 Make sure to call `unset` when the action is no longer needed.

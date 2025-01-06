@@ -8,7 +8,7 @@ a mathematical animation app, but can be used more generally.
 
 ## Example
 
-Button and counter example. For other full examples, please check out the
+Button and counter example. For fully running examples, please check out the
 [git repository](https://github.com/monocurl/quarve).
 
 ```rust
@@ -37,11 +37,15 @@ Preview
 
 ## Installation
 After installing cargo, run
-```shell
+```bash
 cargo install quarve_cli
 ```
 You can then create a Quarve project with the command
 ```quarve new <name>```.
+
+For certain OSes, you may have to perform additional steps. See [setup](./setup.md) for
+relevant information.
+
 Run the project either by running it as a normal rust binary
 or by using ```quarve run```.
 
