@@ -1,8 +1,5 @@
 # Portals
 
-**Warning: Portals are experimental and currently quite buggy**
-
-
 Portals are (to the best of the knowledge of the authors, which is not that much)
 a unique contribution of Quarve.
 

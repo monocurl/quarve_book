@@ -24,6 +24,12 @@ worse performance compared to Cocoa.
 E.g. `C:\Qt\6.8.1\msvc2022_64`.
 2. Append the binaries folder to your `PATH`. E.g. `C:\Qt\6.8.1\msvc2022_64\bin`.
 
+*Linux:*
+[Install Qt](https://www.qt.io/download-dev)
+1. Set the environment variable `QUARVE_BACKEND_PATH` to the root of Qt installation.
+E.g. `~/Qt/6.8.1/gcc_64`.
+2. Append the library folder to to your e`PATH`. E.g. `~/Qt/6.8.1/gcc_64/bin/`
+
 *macOS:*
 [Install Qt](https://www.qt.io/download-dev)
 1. SET the environment variable `QUARVE_BACKEND_PATH` to the root of Qt installation.
@@ -67,6 +73,12 @@ quarve deploy -n <crate_name>
 ```
 After deploying, a target application will be created in the `quarve_target` directory.
 As of now, we do not know do executable packing so for Windows and Linux you will
-have to do to that yourself. For macOS, you may have to update the `Info.plist` file to
+have to do to that yourself (and may want to change directory structure as well).
+For macOS, you may have to update the `Info.plist` file to
 e.g. customize the application icon. Depending on your intended distribution style,
 you may have to codesign the application yourself too.
+
+## Debugging
+
+On Linux, if you get the error that `<Gl/gl.h>` is not found (or something similar),
+it means that you must install the OpenGL dev kit.
