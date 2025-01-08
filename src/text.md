@@ -56,6 +56,7 @@ IVP
     .text_font("font_file_in_res/font")
     .text_size(size)
     .text_color(color)
+    .text_backcolor(RED)
 ```
 
 Note that environment modifiers are somewhat different than regular modifiers
