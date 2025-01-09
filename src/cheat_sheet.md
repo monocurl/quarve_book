@@ -37,7 +37,7 @@ TextField::new(text.binding());
 
 Text Button
 ```rust
-button("Label", |s| {...})
+button("Label", |s| { /* action */ })
 ```
 
 \*There are many controls that one would expect from a UI library that are yet to
@@ -56,11 +56,11 @@ vstack()
     .push(ivp1)
     .push(ivp2)
 
-// binding
-binding.binding_vmap(|content, s| text(content.to_string());
+// vector binding to vstack
+binding.binding_vmap(|content| text(content.to_string());
 
-// signal (slow)
-signal.sig_vmap(|content, s| text(content.to_string());
+// vector signal to vstack (slow)
+signal.sig_vmap(|content| text(content.to_string());
 ```
 
 ## Modifiers

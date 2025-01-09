@@ -1,7 +1,7 @@
 # View Providers
 
 This lesson explains many of the core concepts of Quarve and is hence slightly long.
-However, we still recommend reading (at the least up till IntoViewProvider) as it's important!
+However, we still recommend reading (at the very least, upto and including IntoViewProvider) as it's important!
 
 Rendered elements in Quarve are called **views**. A view has two components:
 a native backing and a **view provider**. The native backing is simply a reference
@@ -23,7 +23,7 @@ Hence, it's an IVP.
 struct Profile {
     name: String,
     color: Color,
-    image: String,
+    image: Resource,
 }
 
 impl IntoViewProvider<Env> for Profile {
@@ -33,7 +33,7 @@ impl IntoViewProvider<Env> for Profile {
     fn into_view_provider(self, env: &Env::Const, s: MSlock) -> impl ViewProvider<Env, UpContext=Self::UpContext, DownContext=Self::DownContext> {
         hstack()
             .push(
-                ImageView::new(&self.image)
+                ImageView::new(self.image)
                     .intrinsic(30, 30)
                     .padding(5)
             )
@@ -67,10 +67,10 @@ implement the `IntoViewProvider` trait yourself.
 Another way is to simply use functions. Here's a translation of the above profile
 into a functional component.
 ```rust
-fn profile(name: &str, image: &str, color: Color) -> impl IVP {
+fn profile(name: &str, image: Resource, color: Color) -> impl IVP {
     hstack()
         .push(
-            ImageView::new(&image)
+            ImageView::new(image)
                 .intrinsic(30, 30)
                 .padding(5)
         )
@@ -84,7 +84,10 @@ fn profile(name: &str, image: &str, color: Color) -> impl IVP {
 to the `MSlock` or `Env` (explained in later lessons).
 However, in some cases you can use the `ivp_using` function if this issue ever arises,
 which gives you access to the additional context (this too has some downsides
-since the given function has to be static).
+since the given lambda has to be static).
+
+Finally, you actually specify the root IVP in the `WindowProvider::root` function.
+This should be easy to find in the default project.
 
 Note that the UpContext and DownContext associated types
 of IntoViewProvider are related to ways of passing information between
@@ -117,9 +120,10 @@ This may seem quite complex, but we'll break down the individual pieces:
 is used to mark the state of this view as dirty, thereby causing a relayout.
 2. `subtree` gives you a handle by which you can add or remove subviews (among other roles)
 3. `backing_source` is something more unique to Quarve. The idea is that sometimes we are creating
-a view provider to replace an existing view
+a view provider to replace an existing view, and we can therefore steal the replaced view's
+resources rather than having to recreate them.
 (similar in premise to a RecyclerView)
-4. `env` not super important for now. The environment is explained more in the [Environment](./environment) lesson.
+4. `env` is not super important for now. The environment is explained more in the [Environment](./environment) lesson.
 5. `s` the state lock is also explained more in the next lesson,
 but for now just think about it as a marker showing we're on the main thread
 
@@ -266,6 +270,9 @@ fn layout_down(&mut self, _subtree: &Subtree<E>, frame: Size, layout_context: &S
             Rect::new(0.0, 0.0, pos, frame.h),
             layout_context, env, s);
 
+        // see below for what context means
+        // feel free to ignore as this is isn't even
+        // a great use case of it
         let ctx = pos + BAR_WIDTH / 2.0;
         self.splitter.layout_down_with_context(
             Rect::new(pos + BAR_WIDTH / 2.0 - self.splitter_size / 2.0, 0.0, self.splitter_size, frame.h),
@@ -357,7 +364,7 @@ In particular, you may want to register to become first responder if you care
 about mouse events happening outside of your boundary (which you can do so by
 return `EventResult::FocusAcquire`)
 
-Here is a (simplified) example of a button event handler.
+Here is a (partially incomplete) example of a button event handler.
 ```rust
 fn handle_event(&self, e: &Event, s: MSlock) -> EventResult {
     if !e.is_mouse() {
@@ -391,7 +398,7 @@ fn handle_event(&self, e: &Event, s: MSlock) -> EventResult {
 
     return EventResult::NotHandled
 }
-        ```
+```
 
 
 I'm not 100% on keeping this system as there are a few quirks, but it
