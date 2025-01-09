@@ -12,7 +12,7 @@ cargo install quarve
 The default backend on macOS builds is Cocoa.
 For Cocoa, Quarve works out of the box and you do not have to perform additional setup.
 
-### Qt Backend (Windows/Linux/macOS)
+### Qt Backend (Windows/Linux)
 
 The default backend on Windows and Linux builds is Qt, which you will have to install.
 

@@ -4,7 +4,7 @@ signals, stores and bindings. You can come back to the other parts
 after finishing the rest of the lessons.
 
 **Remark:** Some of the terminology of the state system comes from Group theory
-(e.g. Word, \[group\] Action).
+(e.g. Word, GroupAction).
 
 ## State Lock
 Most native UI libraries have some operations that can only be performed on the main
@@ -21,6 +21,7 @@ holder.
 There are two types of slocks.
 1. `Slock<MainThreadMarker>` which is abbreviated `MSlock`.
 2. `Slock<AnyThreadMarker>` which is abbreviated `Slock`.
+
 Note that you can freely convert slocks of the first kind to the second kind
 using `.to_general_slock`, which is occasionally necessary. However, converting
 the second kind to the first kind fails if you're not on the main thread.
@@ -50,7 +51,7 @@ Hence, we believe that in many cases the tradeoff is worth it.
 
 Signals are simply values that change over time. Moreover, receivers
 can get notified after the value is updated. Note that `Signal`
-is a trait, and its value is the associated type Target.
+is a trait, and its value takes the associated type Target.
 
 For instance, quarve provides `clock_signal` function that is simply
 a signal that continuously increases with time. Here's an example of
@@ -80,27 +81,27 @@ reference can no longer be upgraded.
 
 By default, `listen` gives a notification for all possible updates,
 even when the 'new' value is the same as the old one.
-If you would only like to get notifications, you can use
+If you would only like to get notifications for true changes, you can use
 `diff_listen` instead (this requires the target to implement `PartialEq`).
 
 ## Store
 The heart of state is a `Store`. Conceptually, a store simply
 stores a particular value and notifies to its observers whenever it changes.
 In this aspect, it's a signal. However, unlike a signal, a `Store` can also
-be changed.
+be changed arbitrarily by users.
 
 In the simplest case, this change is done by manually overwriting the current value.
 ```rust
 let store = Store::new(0);
 // notice the usage of the state lock
-// Here, we apply the SetAction::Set to modify the current value
+// Here, we apply the SetAction::Set action to modify the current value
 store.apply(Set(4), s);
 
 // you can acquire a signal from a store explicitly
 // sig: impl Signal<Target=i32> + Clone
 let sig = store.signal();
 
-// or... you can add listeners directly to the store
+// or you can add listeners directly to the store
 store.listen(|val, s| {
     ...
     true
@@ -113,8 +114,9 @@ is that now observers can see the exact transformation that was
 applied, which can be surprisingly useful.
 
 For many types, such as integers and floats, the 'action' of how you
-change the value is simply setting it. For instance, the action for a vector
-is a sequence of inserts or removals.
+change the value is simply setting it.
+However, this is not always the case.
+For instance, the action for a vector is a sequence of inserts or removals.
 ```rust
 let store = Store::new(vec![Store::new(false)]);
 
@@ -146,7 +148,7 @@ An action listener gets notified every time a store *is about to* change
 (in contrast, regular listeners are notified afterwards). It is given
 the current value, the action, and the state lock.
 ```rust
-let store = Store::new(vec![false, true]);
+let store = Store::new(vec![Store::new(false)]);
 // see below for why the different syntax wrt to signal
 // b: impl Binding<Filterless<Vec<bool>> + Clone
 let b = store.binding();

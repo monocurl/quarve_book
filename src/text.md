@@ -1,7 +1,5 @@
 # Text
 
-The
-
 ## Labels
 
 The easiest way to create text is through the `text` function in the prelude
