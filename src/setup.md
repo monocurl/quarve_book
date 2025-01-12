@@ -12,9 +12,10 @@ cargo install quarve
 The default backend on macOS builds is Cocoa.
 For Cocoa, Quarve works out of the box and you do not have to perform additional setup.
 
-### Qt Backend (Windows/Linux)
+### Qt Backend (Windows/Linux/macOS)
 
 The default backend on Windows and Linux builds is Qt, which you will have to install.
+Optionally for macOS builds, you can request Quarve use Qt instead of Cocoa.
 
 *Windows:*
 [Install Qt](https://www.qt.io/download-dev) using msvc2022 (make sure you have visual studio installed).
@@ -27,6 +28,24 @@ E.g. `C:\Qt\6.8.1\msvc2022_64`.
 1. Set the environment variable `QUARVE_BACKEND_PATH` to the root of Qt installation.
 E.g. `~/Qt/6.8.1/gcc_64`.
 2. Append the library folder to to your e`PATH`. E.g. `~/Qt/6.8.1/gcc_64/bin/`
+
+*macOS:*
+[Install Qt](https://www.qt.io/download-dev)
+1. Add the `qt_backend` feature to quarve.
+2. Set the environment variable `QUARVE_BACKEND_PATH` to the root of Qt installation.
+E.g. `~/Applications/Qt/6.8.1/macos`.
+3. Add the following to your `build.rs`
+```rust
+// this is only necessary for local builds
+// feel free to disable for release
+#[cfg(target_os = "macos")]
+{
+    let mut qt_path = std::env::var("QUARVE_BACKEND_PATH").unwrap();
+    qt_path += "lib/";
+
+    println!("cargo:rustc-link-arg=-Wl,-rpath,{}", qt_path);
+}
+```
 
 ## Create new project
 ```bash
