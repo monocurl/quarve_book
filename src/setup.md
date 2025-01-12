@@ -49,14 +49,28 @@ quarve run -n <crate_name>
 ```
 
 ## Deploy Project
+Quarve technically has some support of bundling, but it's extremely low
+so realistically (for now at least) you will have to do a bit
+of work yourself for final packaging.
+
 ```bash
 quarve deploy
 # for workspaces, you may have to explicitly specify the name of the crate
 quarve deploy -n <crate_name>
 ```
 After deploying, a target application will be created in the `quarve_target` directory.
-As of now, we do not know do executable packing so for Windows and Linux you will
+
+As of now, we do not know do executable packing so for Windows you will
 have to do to that yourself (and may want to change directory structure as well).
+
+For Linux, unfortunately all that is done at the moment is
+creating the directory structure that quarve expects upon installation.
+It's up to you to create the `.deb` or `.rpm` files from here. **Important:**
+in your package manager file, make sure to set a dependency for
+Qt (`rpm: qt6-qtbase` or `deb: qt6-base (>= 6.0)`)
+See [rpm tutorial](https://www.redhat.com/en/blog/create-rpm-package) and/or
+[deb tutorial](https://ubuntuforums.org/showthread.php?t=910717) for basics.
+
 For macOS, you may have to update the `Info.plist` file to
 e.g. customize the application icon. Depending on your intended distribution style,
 you may have to codesign the application yourself too.

@@ -67,7 +67,7 @@ implement the `IntoViewProvider` trait yourself.
 Another way is to simply use functions. Here's a translation of the above profile
 into a functional component.
 ```rust
-fn profile(name: &str, image: Resource, color: Color) -> impl IVP {
+fn profile(name: String, image: Resource, color: Color) -> impl IVP {
     hstack()
         .push(
             ImageView::new(image)
