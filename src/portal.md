@@ -1,8 +1,5 @@
 # Portals
 
-Portals are (to the best of the knowledge of the authors, which is not that much)
-a unique contribution of Quarve.
-
 To provide some motivation of portals, we note the following two problems with
 declarative UI libraries (and partially UI libraries in general).
 1. Typically, the state tree more or less aligns with the view hierarchy,

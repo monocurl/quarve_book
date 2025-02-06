@@ -2,7 +2,7 @@
 
 ## Install Quarve CLI
 ```bash
-cargo install quarve
+cargo install quarve_cli
 ```
 
 ## Additional Setup
